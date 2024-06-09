@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 export const MyLinkDiv = styled.div`
     a{  
         display: inline-block;
-        color: #155fa8;
+        color: #fff;
         cursor: pointer;
         
         text-decoration:none;
+        transition: 300ms;
 
     &:hover{
         transform: translateX(5px);
+        text-decoration: underline;
     }
     }
 `

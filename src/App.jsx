@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp';
+import Dashboard from './pages/Dashboard';
 
 import {
   createBrowserRouter,
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
     <Route>
         <Route index element={<Home />}></Route>
         <Route path='/signup' element={<SignUp />}></Route>
+        <Route path='/dashboard' element={<Dashboard />}></Route>
     </Route>
   )
 );

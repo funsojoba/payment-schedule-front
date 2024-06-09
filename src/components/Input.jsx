@@ -9,6 +9,7 @@ const InputDiv = styled.input`
     background: #fff;
     width: 90%;
     margin-bottom: 15px;
+    background: #e9e9e9;
 `
 
 const Label = styled.label`
