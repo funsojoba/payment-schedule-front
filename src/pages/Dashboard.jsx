@@ -4,6 +4,12 @@ import NavBar from "../components/NavBar"
 import Input from "../components/Input"
 import Button from "../components/Button"
 
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getWallet } from "../store/feature/payment/wallet"
+
+import NairaFormat from "../utils/formatMoney"
+
 
 const Container = styled.div`
     
@@ -42,12 +48,29 @@ const Table = styled.table`
 
 
 const Dashboard = ()=>{
+    const dispatch = useDispatch()
+    const walletState = useSelector((store)=> store.getWallet);
+
+
+    const handleGetWallet = ()=>{
+        dispatch(getWallet())
+    }
+
+    useEffect(()=>{
+        handleGetWallet()
+    }, [])
+
+    let walletBalance = walletState.data
+    console.log(walletState.data)
     return (
         <Container>
             <SideBar />
 
             <ContainerSection>
-                <NavBar title="Dashboard" walletBalance="NGN 100,000" pendingPayment="NGN 30,000"/>
+                <NavBar 
+                    title="Dashboard" 
+                    walletBalance={NairaFormat.format(walletBalance?.data.total_amount)}
+                    pendingPayment="NGN 30,000"/>
 
                 <FlexDivWhite>
                     <WhiteBox>
@@ -59,7 +82,7 @@ const Dashboard = ()=>{
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>NGN 20,000</td>
+                                    <td>{}</td>
                                     <td>June 14, 2024</td>
                                     <td>scheduled</td>
                                 </tr>
