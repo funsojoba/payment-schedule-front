@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import logInSlice from "./feature/auth/login";
 import getWalletSlice from "./feature/payment/wallet";
+import getScheduleSlice from "./feature/payment/getSchedule";
 
 
 
@@ -9,6 +10,7 @@ import getWalletSlice from "./feature/payment/wallet";
 const rootReducer = combineReducers({
     logIn : logInSlice.reducer,
     getWallet: getWalletSlice.reducer,
+    getSchedule: getScheduleSlice.reducer,
   });
   
   export default rootReducer;

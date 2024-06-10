@@ -7,6 +7,7 @@ import Button from "../components/Button"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getWallet } from "../store/feature/payment/wallet"
+import { getSchedule } from "../store/feature/payment/getSchedule"
 
 import NairaFormat from "../utils/formatMoney"
 
@@ -50,18 +51,26 @@ const Table = styled.table`
 const Dashboard = ()=>{
     const dispatch = useDispatch()
     const walletState = useSelector((store)=> store.getWallet);
+    const scheduleState = useSelector((store) => store.getSchedule);
 
 
     const handleGetWallet = ()=>{
         dispatch(getWallet())
     }
 
+    const handleGetSchedule = ()=>{
+        dispatch(getSchedule())
+    }
+
     useEffect(()=>{
         handleGetWallet()
+        handleGetSchedule()
     }, [])
 
+
     let walletBalance = walletState.data
-    console.log(walletState.data)
+    let schedules = scheduleState.data
+    console.log(scheduleState.data)
     return (
         <Container>
             <SideBar />
@@ -70,7 +79,7 @@ const Dashboard = ()=>{
                 <NavBar 
                     title="Dashboard" 
                     walletBalance={NairaFormat.format(walletBalance?.data.total_amount)}
-                    pendingPayment="NGN 30,000"/>
+                    pendingPayment={NairaFormat.format(schedules?.total_scheduled_payment)}/>
 
                 <FlexDivWhite>
                     <WhiteBox>
@@ -81,11 +90,13 @@ const Dashboard = ()=>{
                                 <td>Status</td>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>{}</td>
-                                    <td>June 14, 2024</td>
-                                    <td>scheduled</td>
-                                </tr>
+                                {schedules?.data.map(data => {
+                                    return <tr>
+                                                <td>{NairaFormat.format(data.amount)}</td>
+                                                <td>{data.schedule_date}</td>
+                                                <td>{data.status}</td>
+                                            </tr>
+                                })}
                             </tbody>
                         </Table>
                     </WhiteBox>
