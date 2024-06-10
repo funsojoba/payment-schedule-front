@@ -54,8 +54,10 @@ const NavBar = ({title, walletBalance, pendingPayment}) =>{
             <UserSection>
                 <Wallet>
                     <div className="wallet-info">
-                        <small>pending payment</small></div>
-                    {pendingPayment}</Wallet>
+                        <small>pending payment</small>
+                    </div>
+                            {pendingPayment}
+                    </Wallet>
             </UserSection>
             <UserSection>
                 <Wallet>

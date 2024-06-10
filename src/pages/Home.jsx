@@ -109,10 +109,12 @@ const Home = ()=>{
                             topLabel="Password"
                             value={password}
                             onChange={(e)=> setPassword(e.target.value)}/>
-                        <Button title={loading ? <ClipLoader
+                        <Button 
+                            title={loading ? <ClipLoader
                               size={10}
                               color="#ffffff"
-                            /> : "Log in"} onClick={handleLogin} />
+                                /> : "Log in"} 
+                            onClick={handleLogin} />
                         <br></br>
                         <small>Don't have an account? <Link to="/signup">Sign Up</Link> </small>
                     </form>

@@ -4,11 +4,18 @@ import axios from "axios";
 
 import baseUrl from "../../baseUrl";
 
-export const logIn = createAsyncThunk(
-    "users/login/", async (data, thunkApi) => {
+const token = localStorage.getItem("accessToken")
+
+export const postSchedule = createAsyncThunk(
+    "payment/schedule_payment", async (data, thunkApi) => {
         try {
             const response = await axios.post(
-                baseUrl + "auth/log_in/", data
+                baseUrl + "payment/schedule_payment/", data,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
             )
             return response.data
         } catch (error) {
@@ -17,8 +24,8 @@ export const logIn = createAsyncThunk(
     }
 )
 
-const logInSlice = createSlice({
-    name: "logIn",
+const postScheduleSlice = createSlice({
+    name: "postSchedule",
     initialState: {
         loading: false,
         data: null,
@@ -27,26 +34,22 @@ const logInSlice = createSlice({
     reducers: {},
     extraReducers: (builder) =>{
         builder
-        .addCase(logIn.pending, (state) => {
+        .addCase(postSchedule.pending, (state) => {
             state.loading = true
         })
-        .addCase(logIn.fulfilled, (state, action) => {
+        .addCase(postSchedule.fulfilled, (state, action) => {
             state.loading = false
             state.data = action.payload
             state.error = null
 
-            console.log(action.payload)
-
-            localStorage.setItem("accessToken", action.payload.token.access)
-            window.location.href = "/dashboard"
-
+            window.location.reload()
         })
-        .addCase(logIn.rejected, (state, action) => {
+        .addCase(postSchedule.rejected, (state, action) => {
             state.loading = false
-            state.error = action.payload
+            state.error = action
         })
     }
 })
 
 
-export default logInSlice
+export default postScheduleSlice
