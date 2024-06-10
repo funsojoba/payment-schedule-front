@@ -18,7 +18,7 @@ const Label = styled.label`
 `
 
 
-const Input = ({type, name, value, onChange, topLabel })=>{
+const Input = ({type, name, value, onChange, topLabel, required })=>{
     return (
         <div>
             <Label>{topLabel}</Label>
@@ -26,6 +26,7 @@ const Input = ({type, name, value, onChange, topLabel })=>{
                 type={type}
                 name={name}
                 value={value}
+                required={required}
                 onChange={onChange}
                 ></InputDiv>
         </div>

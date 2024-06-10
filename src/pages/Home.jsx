@@ -105,12 +105,14 @@ const Home = ()=>{
                             name="email" 
                             topLabel="Email"
                             value={email}
+                            required={true}
                             onChange={(e)=>setEmail(e.target.value)}/>
                         <Input 
                             type="password" 
                             name="password"  
                             topLabel="Password"
                             value={password}
+                            required={true}
                             onChange={(e)=> setPassword(e.target.value)}/>
                         <Button 
                             title={loading ? <ClipLoader

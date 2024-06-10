@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import { toast } from "react-toastify";
+
 
 import baseUrl from "../../baseUrl";
 
@@ -47,6 +49,24 @@ const postScheduleSlice = createSlice({
         .addCase(postSchedule.rejected, (state, action) => {
             state.loading = false
             state.error = action
+
+            console.log("ERROR: ", action.payload)
+
+            if (action.payload) {
+                if (typeof action.payload === 'object') {
+                  for (const key in action.payload) {
+                    if (Array.isArray(action.payload[key])) {
+                      action.payload[key].forEach((message) => toast.error(message));
+                    } else if (typeof action.payload[key] === 'string') {
+                      toast.error(action.payload[key]);
+                    }
+                  }
+                } else {
+                  toast.error("An unknown error occurred");
+                }
+              } else {
+                toast.error("An unknown error occurred");
+              }
         })
     }
 })

@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar"
 import Input from "../components/Input"
 import Button from "../components/Button"
 
+import { ToastContainer } from "react-toastify"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getWallet } from "../store/feature/payment/wallet"
@@ -91,6 +92,7 @@ const Dashboard = ()=>{
 
     return (
         <Container>
+            <ToastContainer/>
             <SideBar />
 
             <ContainerSection>
@@ -127,11 +129,13 @@ const Dashboard = ()=>{
                                 name="amount" 
                                 topLabel="Amount *"
                                 value={amount}
+                                required={true}
                                 onChange={(e)=> setAmount(e.target.value)}
                                 />
                             <Input 
                                 type="date" 
                                 name="date" 
+                                required={true}
                                 topLabel="Schedule date *"
                                 value={scheduleDate}
                                 onChange={(e)=> setScheduleDate(e.target.value)}

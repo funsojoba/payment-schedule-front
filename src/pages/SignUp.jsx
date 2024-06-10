@@ -70,10 +70,7 @@ const SignUp = ()=>{
 
     const signUpState = useSelector((store)=> store.signUp)
 
-    const {data, loading, error} = signUpState
-
-
-    console.log("SIGN UP DATA: ", signUpState)
+    const {loading} = signUpState
 
     const dispatch = useDispatch()
 
@@ -108,24 +105,28 @@ const SignUp = ()=>{
                         <Input 
                             type="text" 
                             name="first_name" 
+                            required={true}
                             value={firstName}
                             onChange={(e)=>setFirstName(e.target.value)}
                             topLabel="First Name"/>
                         <Input 
                             type="text" 
                             name="last_name" 
+                            required={true}
                             value={lastName}
                             onChange={(e)=>setLastName(e.target.value)}
                             topLabel="Last Name"/>
                         <Input 
                             type="text" 
                             name="email" 
+                            required={true}
                             value={email}
                             onChange={(e)=>setEmail(e.target.value)}
                             topLabel="Email"/>
                         <Input 
                             type="password" 
                             name="password"  
+                            required={true}
                             value={password}
                             onChange={(e)=>setPassword(e.target.value)}
                             topLabel="Password"/>
