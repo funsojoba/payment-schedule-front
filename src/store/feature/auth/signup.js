@@ -35,8 +35,8 @@ const signUpSlice = createSlice({
             state.loading = false
             state.data = action.payload
             state.error = null
-
-            // window.location.href = "/dashboard"
+            toast.success("Sign up successful")
+            window.location.href = "/"
 
         })
         .addCase(signUp.rejected, (state, action) => {

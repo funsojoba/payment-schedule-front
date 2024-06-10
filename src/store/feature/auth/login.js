@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 import baseUrl from "../../baseUrl";
@@ -12,6 +13,7 @@ export const logIn = createAsyncThunk(
             )
             return response.data
         } catch (error) {
+            console.log("LOGIN ERROR: ",)
             return thunkApi.rejectWithValue(error.response.data)
         }
     }
@@ -44,6 +46,16 @@ const logInSlice = createSlice({
         .addCase(logIn.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
+
+            if (action.payload) {
+                for (const key in action.payload) {
+                  if (Array.isArray(action.payload[key])) {
+                    action.payload[key].forEach((message) => toast.error(key + " : " + message));
+                  }
+                }
+              } else {
+                toast.error("An unknown error occurred");
+              }
         })
     }
 })

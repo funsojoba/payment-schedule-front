@@ -2,11 +2,13 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import Input from "../components/Input";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../store/feature/auth/login";
 
 import { ClipLoader } from "react-spinners";
+
+import { ToastContainer } from "react-toastify";
 
 
 import { Link } from "react-router-dom";
@@ -81,6 +83,7 @@ const Home = ()=>{
 
     return (
         <Container>
+            <ToastContainer/>
             <ContainerSectionText>
                 <div>
                     <Title>
